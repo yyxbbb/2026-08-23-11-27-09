@@ -1,0 +1,12 @@
+import numpy as np
+np.random.seed(0)
+n=np.random.randn(1000)
+print(f"seed=0时，均值为{n.mean():.3f}，标准差为{n.std():.3f}")
+np.random.seed(45)
+m=np.random.randn(1000)
+print(f"seed=45时，均值为{m.mean():.3f}，标准差为{m.std():.3f}")
+np.random.seed(0)
+a=np.random.randn(3)
+np.random.seed(0)
+b=np.random.randn(3)
+print("同种子两次抽样是否相同",np.array_equal(a,b))
