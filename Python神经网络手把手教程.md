@@ -232,6 +232,7 @@ print("同种子两次抽样是否相同:", np.array_equal(a, b), a)
 - `plt.plot(x, y)` 画折线；`plt.scatter(x, y)` 画散点。
 - `plt.xlabel/ylabel/title/legend()` 加标注；`plt.show()` 显示。
 - 在 Jupyter 里常加 `%matplotlib inline` 让图直接嵌在 notebook 中。
+- 想让样本点带「噪声」（偏离曲线），给 y 加一点随机量即可，例如 `y_noise = np.sin(pts) + (np.random.rand(30)-0.5)*0.5`。`np.random.rand` 本天已学过，它给 0~1 的均匀随机数，`-0.5` 再乘系数就把噪声控制在 ±0.5 附近。
 
 💻 **动手（9分钟）**
 
@@ -244,7 +245,12 @@ plt.plot(x, np.sin(x), label="sin(x)")
 
 # 随机取 30 个点当"样本"
 pts = np.random.rand(30) * 2 * np.pi
-plt.scatter(pts, np.sin(pts), color="red", label="样本点")
+plt.scatter(pts, np.sin(pts), color="red", label="样本点(无噪声)")
+
+# 想模拟"带测量误差的真实数据"，就给 y 加一点随机噪声：
+# np.random.rand(30) 给 0~1 的均匀随机数，减 0.5 得到 -0.5~0.5，再乘 0.3 就把噪声控制在 ≈±0.15
+y_noise = np.sin(pts) + (np.random.rand(30) - 0.5) * 0.3
+plt.scatter(pts, y_noise, color="green", label="样本点(带噪声)")
 
 plt.xlabel("x")
 plt.ylabel("y")
